@@ -10,9 +10,13 @@ class Airport
   end
 
   def instruct_to_takeoff(plane)
-    @flying = true
+    flying
     @planes.pop
     puts "#{plane} has taken off from airport"
+  end
+
+  def flying
+    take_off == true
   end
 
 end
