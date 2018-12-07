@@ -35,7 +35,7 @@ describe Airport do
         expect { airport.instruct_to_takeoff(plane) }.to raise_error('Plane already took off')
       end
     end
-    context 'airport is empty'do
+    context 'airport is empty' do
       it "raises an error" do
         allow(airport). to receive(:stormy?).and_return false
         allow(airport). to receive(:empty?).and_return true

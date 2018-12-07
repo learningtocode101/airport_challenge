@@ -20,6 +20,7 @@ class Airport
     @planes.delete(plane)
   end
 
+private
   def full?
     @planes.count == capacity
   end
@@ -29,6 +30,6 @@ class Airport
   end
 
   def empty?
-    @planes.count == 0
+    @planes.count == zero?
   end
 end
