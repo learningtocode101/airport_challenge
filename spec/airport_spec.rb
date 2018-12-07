@@ -1,8 +1,8 @@
-require'airport'
+require 'airport'
 
 describe Airport do
   subject(:airport) { described_class.new(Airport::DEFAULT_CAPACITY) }
-  let(:plane) { double :plane}
+  let(:plane) { double :plane }
 
   describe '#land' do
     it 'instructs a plane to land' do
@@ -11,7 +11,8 @@ describe Airport do
     end
     context 'airport full' do
       it 'raises an error' do
-        airport.capacity.times { airport.instruct_to_land(Plane.new)}
+        allow(airport). to receive(:stormy?).and_return false
+        airport.capacity.times { airport.instruct_to_land(Plane.new) }
         expect { airport.instruct_to_land(plane) }.to raise_error("Airport is full")
       end
     end
@@ -34,8 +35,16 @@ describe Airport do
     end
   end
 
-  it "allows setting capacity of airport" do
+  it "sets default capacity of airport" do
     expect(airport.capacity).to eq Airport::DEFAULT_CAPACITY
   end
+
+  context 'stormy' do
+    it "raises an error" do
+      allow(airport). to receive(:stormy?).and_return true
+      expect { airport.instruct_to_land(plane) }.to raise_error('Too stormy to land')
+    end
+  end
+
 
 end

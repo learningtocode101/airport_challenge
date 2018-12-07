@@ -2,7 +2,7 @@ class Airport
   DEFAULT_CAPACITY = 10
 
   attr_reader :capacity
-  def initialize(capacity = DEFAULT_CAPACITY)
+  def initialize(capacity= DEFAULT_CAPACITY)
     @planes = []
     @capacity = capacity
   end
@@ -10,6 +10,7 @@ class Airport
   def instruct_to_land(plane)
     fail "Airport is full" if full?
     raise "Plane already landed" if @planes.include?(plane)
+    raise "Too stormy to land" if stormy?
     @planes << plane
   end
 
@@ -22,4 +23,7 @@ class Airport
     @planes.count == capacity
   end
 
+  def stormy?
+    rand(1...4) > 2
+  end
 end
