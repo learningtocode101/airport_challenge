@@ -8,8 +8,8 @@ class Airport
   end
 
   def instruct_to_land(plane)
-    raise "Plane already landed" if @planes.include?(plane)
     fail "Airport is full" if full?
+    raise "Plane already landed" if @planes.include?(plane)
     @planes << plane
   end
 
