@@ -6,6 +6,7 @@ describe Airport do
 
   describe '#land' do
     it 'instructs a plane to land' do
+      allow(airport). to receive(:stormy?).and_return false
       expect(airport).to respond_to(:instruct_to_land).with(1).argument
       expect(airport.instruct_to_land(plane)).to eq [plane]
     end
@@ -17,7 +18,8 @@ describe Airport do
       end
     end
     context 'plane already landed' do
-      it 'raises an error when plane already landed' do
+      it 'raises an error' do
+        allow(airport). to receive(:stormy?).and_return false
         airport.instruct_to_land(plane)
         expect { airport.instruct_to_land(plane) }.to raise_error('Plane already landed')
       end
@@ -33,6 +35,14 @@ describe Airport do
         expect { airport.instruct_to_takeoff(plane) }.to raise_error('Plane already took off')
       end
     end
+    context 'airport is empty'do
+      it "raises an error" do
+        allow(airport). to receive(:stormy?).and_return false
+        allow(airport). to receive(:empty?).and_return true
+        airport.instruct_to_land(plane)
+        expect { airport.instruct_to_takeoff(plane) }.to raise_error("Airport is empty")
+      end
+    end
   end
 
   it "sets default capacity of airport" do
@@ -45,6 +55,5 @@ describe Airport do
       expect { airport.instruct_to_land(plane) }.to raise_error('Too stormy to land')
     end
   end
-
 
 end
