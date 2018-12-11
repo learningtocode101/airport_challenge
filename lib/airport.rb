@@ -15,7 +15,7 @@ class Airport
   end
 
   def instruct_to_takeoff(plane)
-    raise "Plane already took off" unless @planes.include?(plane)
+    raise "Plane not available for take off" unless @planes.include?(plane)
     raise "Airport is empty" if empty?
     @planes.delete(plane)
   end
@@ -30,6 +30,6 @@ private
   end
 
   def empty?
-    @planes.count == zero?
+    @planes.count == 0
   end
 end
