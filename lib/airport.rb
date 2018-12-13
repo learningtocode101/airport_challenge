@@ -1,3 +1,4 @@
+require 'weatherstation'
 class Airport
   DEFAULT_CAPACITY = 10
 
@@ -11,7 +12,7 @@ class Airport
     fail "Airport is full" if full?
     raise "Plane already landed" if @planes.include?(plane)
     raise "Too stormy to land" if stormy?
-    @planes << plane
+    @planes.push(plane)
   end
 
   def instruct_to_takeoff(plane)
@@ -23,10 +24,6 @@ class Airport
 private
   def full?
     @planes.count == capacity
-  end
-
-  def stormy?
-    rand(1...4) > 2
   end
 
   def empty?

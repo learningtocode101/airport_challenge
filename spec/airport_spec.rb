@@ -2,7 +2,7 @@ require 'airport'
 
 describe Airport do
   subject(:airport) { described_class.new(capacity) }
-  let(:plane) { double :plane }
+  let(:plane) { Plane.new }
   let(:capacity) { double :capacity }
 
   it "knows it's capacity" do
