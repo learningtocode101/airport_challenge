@@ -18,19 +18,19 @@ describe Airport do
         expect(airport.instruct_to_land(plane)).to eq [plane]
         expect { airport.instruct_to_land(Plane.new) }.to_not raise_error
       end
-    context 'plane already landed' do
-      it 'raises an error' do
-        airport.instruct_to_land(plane)
-        expect { airport.instruct_to_land(plane) }.to raise_error('Plane already landed')
+      context 'plane already landed' do
+        it 'raises an error' do
+          airport.instruct_to_land(plane)
+          expect { airport.instruct_to_land(plane) }.to raise_error('Plane already landed')
+        end
       end
-    end
-    context 'when full' do
-      it 'raises an error' do
-        airport = Airport.new(20, weatherstation)
-        20.times { airport.instruct_to_land(Plane.new) }
-        expect { airport.instruct_to_land(Plane.new) }.to raise_error("Airport is full")
+      context 'when full' do
+        it 'raises an error' do
+          airport = Airport.new(20, weatherstation)
+          20.times { airport.instruct_to_land(Plane.new) }
+          expect { airport.instruct_to_land(Plane.new) }.to raise_error("Airport is full")
+        end
       end
-    end
     end
     context 'stormy weather' do
       it "raises an error" do
@@ -47,12 +47,12 @@ describe Airport do
         airport.instruct_to_land(plane)
         expect { airport.instruct_to_takeoff(plane) }.equal? true
       end
-    context 'plane not available' do
-      it 'raises an error' do
-        allow(airport).to receive(:at_airport?).and_return false
-        expect { airport.instruct_to_takeoff(plane) }.to raise_error('Plane already took off')
+      context 'plane not available' do
+        it 'raises an error' do
+          allow(airport).to receive(:at_airport?).and_return false
+          expect { airport.instruct_to_takeoff(plane) }.to raise_error('Plane already took off')
+        end
       end
-    end
     end
     context 'stormy weather' do
       it "raises an error" do
